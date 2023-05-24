@@ -159,6 +159,35 @@ void T(){
 		}
 	}
 					
-					
-
+	
+void M(){
+	if(actual -> info == 'm'){
+		siguiente(); 
+		if(actual -> info == '('){
+			siguiente();
+		}else{
+			fprintf(erroresSintacticos,"ERROR EN (%d). Se esperaba '('", ubicacion);
+		}
+		RPP();
+		if(actual -> info ==')'){
+			siguiente();
+		}else{
+			fprintf(erroresSintacticos, "ERROR EN (%d). Se esperaba ')'", ubicacion);
+		}
+		if(actual -> info == '{'){
+			siguiente();
+		}else{
+			fprintf(erroresSintacticos, "ERROR EN (%d). Se esperaba '{'", ubicacion);
+		}
+		SP();
+		if(actual -> info == '}'){
+			siguiente();
+		}else{
+			fprintf(erroresSintacticos, "ERROR EN (%d). Se esperaba '}'", ubicacion);
+		}
+		return;
+	}else{
+		fprintf(erroresSintacticos, "ERROR EN (%d). Se esperaba la palabra reservada 'mientras'", ubicacion);
+	}
+}
 
