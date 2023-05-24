@@ -190,4 +190,24 @@ void M(){
 		fprintf(erroresSintacticos, "ERROR EN (%d). Se esperaba la palabra reservada 'mientras'", ubicacion);
 	}
 }
+					
+void BP(){
+	if(actual -> info == 'o'){
+		siguiente();
+		SP();
+		if(actual -> info == 'f'){
+			siguiente();
+		}else {
+			fprintf(erroresSintacticos,"ERROR EN (%d). Se esperaba la palabra reservada 'finsi'",ubicacion);
+		}
+		return;
+	}else if(actual -> info == 'f'){
+		siguiente();
+		return;
+	}else{
+		fprintf(erroresSintacticos, "ERROR EN (%d). Se esperaba la palabra reservada 'sino', o
+		la palabra reservada 'finsi'", ubicacion);
+	}
+}
+			
 
