@@ -209,5 +209,102 @@ void BP(){
 		la palabra reservada 'finsi'", ubicacion);
 	}
 }
-			
+	
+void CP(){
+	if(actual -> info == ';'){
+		siguiente();
+		return;
+	}else if(actual -> info == 'a' || actual -> info == 'i' || actual -> info == 'h' || actual -> info == 'm' || actual -> info == 't' || actual -> info == '[' || actual -> info == 'v' || actual -> info == 's'){
+		S();
+		if(actual -> info == ';'){
+			siguiente();
+		}else{
+			fprintf(erroresSintacticos, "ERROR EN (%d). Se esperaba ';'",ubicacion);
+		}return;
+	}else if(actual -> info == '{'){
+		siguiente();
+		SP();
+		if(actual -> info == '}'){
+			siguiente();
+		}else {
+			fprintf(erroresSintacticos, "ERROR EN (%d). Se esperaba '{'", ubicacion);
+		}
+		return;
+	}else{
+		fprintf(erroresSintacticos, "ERROR EN (%d). Se esperaba un ';', o un identificador, o la palabra reservada 'si',
+		 o la palabra reservada 'haz', o la palabra reservada 'mientras', o la palabra reservada 'para', o la palabra
+		 reservada 'regresa', o una constante cadena o '[', o '{'", ubicacion);
+		 return;
+	}
+}
+
+
+void HP(){
+	if(actual -> info == 'm'){
+		siguiente();
+		if(actual ->info =='('){
+			siguiente();
+		}else{
+			fprintf(erroresSintacticos, "ERROR EN (%d). Se esperaba '('", ubicacion);
+		}
+		RPP();
+		if(actual -> info==')'){
+			siguiente();
+		}else {
+			fprintf(erroresSintacticos, "ERROR EN (%d). Se esperaba ')'", ubicacion);
+		}
+		if(actual -> info == ';'){
+			siguiente();
+		}else{
+			fprintf(erroresSintacticos, "ERROR EN (%d). Se esperaba ';'",ubicacion);
+		}
+		return;
+	}else{
+		fprintf(erroresSintacticos, "ERROR EN (%d). Se esperaba 'm'", ubicacion);
+		return;
+	}
+}
+
+void Valor(){
+	if(actual -> info == 'a'|| actual -> info == 'n'|| actual -> info == 'c'||actual->info== 'x'){
+		VP();
+		return;
+	}else if(c==')'){
+		return;
+	}else{
+		fprintf(erroresSintacticos, "ERROR (%d). Se esperaba un identificador, o una constante numérica entera,
+		o una constante carácter, o una constante númerica real.",ubicacion);
+		return;
+	}
+}
+
+void Llama(){
+	if(actual -> info == '['){
+		siguiente();
+		if(actual -> info == 'a'){
+			siguiente();
+		}else {
+			fprintf(erroresSintacticos, "ERROR EN (%d). Se esperaba un identificador");
+		}
+		if(actual -> info == '('){
+			siguiente();
+		}else{
+			fprintf(erroresSintacticos, "ERROR EN (%d). Se esperaba '('", ubicacion);
+		}
+		arg();
+		if(actual -> info == ')'){
+			siguiente();
+		}else {
+			fprintf(erroresSintacticos, "ERROR EN (%d). Se esperaba ')'", ubicacion);
+		}
+		if(actual -> info == ']'){
+			siguiente();
+		}else{
+			fprintf(erroresSintacticos, "ERROR EN (%d). Se esperaba ']'", ubicacion);
+		}
+		return;
+	}else{
+		fprintf(erroresSintacticos,"ERROR EN (%d). Se esperaba '['", ubicacion);
+	}
+}
 
